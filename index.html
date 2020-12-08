@@ -7,6 +7,8 @@
 <body>
 
   <script>
+
+    // Randomly returns either 'rock', 'paper', or 'scissors'
     function computerPlay() {
       let val = Math.floor(Math.random() * 3) + 1;
       
@@ -21,15 +23,12 @@
       }
     }
 
-    function printLoss(player, computer){
-      return "You lose! " + computer + " beats " + player;
-    }
+    // Plays a single round of Rock Paper Scissors and
+    // returns a string that declares winner of round
+    function playRound(playerSelection, computerSelection){
+      let player = playerSelection.toLowerCase();
+      let computer = computerSelection.toLowerCase();
 
-    function printWin(player, computer){
-      return "You win! " + player + " beats " + computer;
-    }
-
-    function printResult(player, computer){
       let result = "";
       if(player == computer){
         result = "You Tie!";
@@ -37,23 +36,55 @@
       else if ( (computer == "rock" && player == "scissors") ||
         (computer == "paper" && player == "rock") ||
         (computer == "scissors" && player == "paper") ){
-          result = printLoss(player,computer);
+          result = "You lose! " + computer + " beats " + player;
         
       }
       else{
-        result = printWin(player, computer);
+        result = "You win! " + player + " beats " + computer;
       }
       return result;
     }
-    
-    function playRound(playerSelection, computerSelection){
-      let player = playerSelection.toLowerCase();
-      let computer = computerSelection.toLowerCase();
-      
-      return printResult(player, computer);
+
+    // Search result string for keywords to figure out player's score
+    function getPlayerScore(result){
+      if(result.includes("You win!")){
+        return 1;
+      }
+      else if(result.includes("You lose!")){
+        return 0;
+      }
     }
 
-    console.log(computerPlay());
+    // Prompts user for move and returns their input
+    function getPlayerMove(){
+      return window.prompt("Rock, Paper, or Scissors?");
+    }
+
+    // plays a 5 round game that keeps score and reports a winner or loser at the end
+    function game(){
+      let playerScore = 0;
+      let computerScore = 0;
+
+      for(let i = 0; i < 5; i++){
+        let player = getPlayerMove();
+        let computer = computerPlay();
+        let result = playRound(player, computer);
+        let score = getPlayerScore(result);
+        if(score == 1){
+          ++playerScore;
+        }
+        else if(score == 0){
+          ++computerScore;
+        }
+        console.log(result);
+        console.log("Player score: " + playerScore + ", Computer score: " + computerScore );
+      }
+    }
+    // console.log(computerPlay());
+    const playerSelection = "rock";
+    const computerSelection = computerPlay();
+    // console.log(playRound(playerSelection, computerSelection));
+    game();
 
 
   </script>
