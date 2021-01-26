@@ -7,9 +7,6 @@ const finalResults = document.querySelector('#finalResults');
 const score = document.querySelector('#score');
 const playAgainButton = document.querySelector('.playAgain')
 
-// rock.addEventListener('click', game);
-// paper.addEventListener('click', game);
-// scissors.addEventListener('click', game);
 let playerScore = 0;
 let computerScore = 0;
 
@@ -85,8 +82,8 @@ function game(e){
    
 
     roundResults.textContent = result;
-    // console.log("Player score: " + playerScore + ", Computer score: " + computerScore );
-    score.textContent = `Player's score: ${playerScore}  Computer's score: ${computerScore}`;
+    score.textContent = `Player's score: ${playerScore}  \u00a0 Computer's score: ${computerScore}`;
+    
 
     if(isGameOver()){
         printFinalResults();
@@ -103,10 +100,3 @@ function startGame(){
 }
 
 startGame();
-
-// console.log(computerPlay());
-// const playerSelection = "rock";
-// const computerSelection = computerPlay();
-// console.log(playRound(playerSelection, computerSelection));
-// game();
-
